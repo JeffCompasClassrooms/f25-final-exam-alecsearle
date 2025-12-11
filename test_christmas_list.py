@@ -36,8 +36,7 @@ def test_print_list(capsys, temp_filename):
     cl.check_off("Book")
     cl.print_list()
     captured = capsys.readouterr()
-    assert "[x] Book" in captured.out
-    assert "[_] Game" in captured.out
+    assert captured.out == "[x] Book\n[_] Game\n"
 
 def test_print_empy_list(capsys, temp_filename):
     cl = ChristmasList(temp_filename)
@@ -84,3 +83,11 @@ def test_check_off_nonexistent_item(temp_filename):
     cl.check_off("Scarf")
     items = cl.loadItems()
     assert items[0]["purchased"] == False
+
+def test_remove_nonexistent_item(temp_filename):
+    cl = ChristmasList(temp_filename)
+    cl.add("Hat")
+    cl.remove("Socks")
+    items = cl.loadItems()
+    assert len(items) == 1
+    assert items[0]["name"] == "Hat"

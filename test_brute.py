@@ -20,7 +20,7 @@ def test_brute_once_correct():
 def test_brute_once_incorrect():
     secret = "abcdef"
     brute = Brute(secret)
-    assert brute.bruteOnce("wrongpass") == False
+    assert brute.bruteOnce("notrightstring") == False
 
 def test_brute_once_edge_cases():
     brute = Brute("a")
@@ -34,8 +34,7 @@ def test_brute_once_edge_cases():
 def test_brute_many_success():
     secret = "a"
     brute = Brute(secret)
-    result = brute.bruteMany(1000)
-    assert result >= 0
+    assert brute.bruteMany(1000) >= 0
 
 def test_brute_many_failure(monkeypatch):
     secret = "notfound"
