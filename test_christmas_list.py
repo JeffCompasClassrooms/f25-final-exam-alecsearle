@@ -63,10 +63,12 @@ def test_multiple_actions(temp_filename):
     cl.add("Board Game")
     cl.check_off("Action Figure")
     cl.remove("Board Game")
+    cl.add("Board Game")
     items = cl.loadItems()
-    assert len(items) == 1
+    assert len(items) == 2
     assert items[0]["name"] == "Action Figure"
     assert items[0]["purchased"] == True
+    assert items[1]["name"] == "Board Game"
 
 def test_add_duplicate_items(temp_filename):
     cl = ChristmasList(temp_filename)
